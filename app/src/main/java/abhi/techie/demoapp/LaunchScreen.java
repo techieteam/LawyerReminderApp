@@ -2,15 +2,29 @@ package abhi.techie.demoapp;
 
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.view.View;
+import android.widget.Button;
+import android.widget.EditText;
+import android.widget.TextView;
 
 public class LaunchScreen extends AppCompatActivity {
+
+    boolean serviceStatus = false;
+    TextView status;
+    Button btn;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_launch_screen);
+        status =  (TextView)findViewById(R.id.status);
+        btn=  (Button)findViewById(R.id.btn);
+        setDefaultView();
+
     }
 
     @Override
@@ -34,4 +48,26 @@ public class LaunchScreen extends AppCompatActivity {
 
         return super.onOptionsItemSelected(item);
     }
+
+
+     public void setDefaultView(){
+
+         status.setText("Service is not Running..");
+
+         btn.setText("Start Service");
+     }
+
+    public void manageService(View view){
+
+
+        String usage = "usage : "+ CpuUsage.readUsage();
+        Log.d("info",usage);
+        serviceStatus = true;
+        status.setText("Service is Running..");
+        btn.setText("Stop Service");
+    }
+
+
+
+
 }
